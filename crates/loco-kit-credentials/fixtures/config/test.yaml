@@ -1,0 +1,32 @@
+# The smallest Loco config the overlay unit tests need: a JWT secret to put a
+# placeholder in, and a `settings:` block that must survive untouched. The
+# app's own configs are checked in the app's `tests/credentials.rs`.
+logger:
+  enable: false
+  level: debug
+  format: compact
+
+server:
+  port: 5150
+  host: http://localhost
+  middlewares: {}
+
+workers:
+  mode: ForegroundBlocking
+
+database:
+  uri: "sqlite::memory:"
+  enable_logging: false
+  connect_timeout: 500
+  idle_timeout: 500
+  min_connections: 1
+  max_connections: 1
+
+auth:
+  jwt:
+    secret: literal
+    expiration: 604800
+
+settings:
+  uploads:
+    driver: memory

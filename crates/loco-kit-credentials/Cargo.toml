@@ -1,0 +1,21 @@
+[package]
+name = "loco-kit-credentials"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# Encrypted `config/credentials*.yml.enc` (Rails' credentials) and the
+# `cargo loco credentials` command. App-agnostic: it depends on Loco, never on
+# the app crate.
+
+[dependencies]
+loco-rs = { workspace = true }
+serde = { version = "1" }
+serde_json = { version = "1" }
+aes-gcm = { version = "0.10" }
+base64 = { version = "0.22" }
+hex = { version = "0.4" }
+tempfile = { version = "3" }
+clap = { version = "4", features = ["derive"] }
+# Same YAML crate (and version) Loco parses config with.
+serde_yaml_ng = { version = "0.10" }
