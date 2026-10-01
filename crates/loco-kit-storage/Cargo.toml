@@ -1,0 +1,25 @@
+[package]
+name = "loco-kit-storage"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# `ctx.storage` from an `initializers.storage` config block, sharded storage
+# keys, and a `cargo loco doctor` check. App-agnostic: it depends on Loco,
+# never on the app.
+
+[features]
+# The `s3` driver: S3 and S3-compatible stores (R2, MinIO).
+s3 = ["loco-rs/storage_aws_s3"]
+
+[dependencies]
+loco-rs = { workspace = true }
+async-trait = { version = "0.1" }
+bytes = { version = "1" }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+uuid = { version = "1.6", features = ["v4"] }
+
+[dev-dependencies]
+tempfile = { version = "3" }
+tokio = { version = "1", features = ["macros", "rt"] }
