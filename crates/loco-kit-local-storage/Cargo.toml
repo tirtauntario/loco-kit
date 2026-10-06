@@ -1,16 +1,13 @@
 [package]
-name = "loco-kit-storage"
+name = "loco-kit-local-storage"
 version = "0.1.0"
 edition = "2021"
 publish = false
 
-# `ctx.storage` from an `initializers.storage` config block, sharded storage
-# keys, and a `cargo loco doctor` check. App-agnostic: it depends on Loco,
-# never on the app.
-
-[features]
-# The `s3` driver: S3 and S3-compatible stores (R2, MinIO).
-s3 = ["loco-rs/storage_aws_s3"]
+# `ctx.storage` on the local disk or in memory, from an `initializers.storage`
+# config block, plus sharded storage keys and a `cargo loco doctor` check.
+# App-agnostic: it depends on Loco, never on the app. S3 needs no kit: use
+# Loco's own `storage_aws_s3` driver.
 
 [dependencies]
 loco-rs = { workspace = true }

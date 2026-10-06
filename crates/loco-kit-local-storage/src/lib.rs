@@ -1,4 +1,5 @@
-//! `ctx.storage` configured from YAML, and sharded storage keys.
+//! `ctx.storage` on the local disk or in memory, configured from YAML, and
+//! sharded storage keys.
 //!
 //! * **config**: an `initializers.storage` block picks the driver
 //!   ([`StorageConfig`]) and [`install`] builds it into `ctx.storage` from

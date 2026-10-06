@@ -14,7 +14,7 @@ use loco_rs::{
 use crate::StorageKey;
 
 /// Where probe files go; each is deleted right after it is read back.
-const PROBE_DIR: &str = ".loco-kit-storage";
+const PROBE_DIR: &str = ".loco-kit-local-storage";
 
 /// Registered in `App::initializers`, it makes `cargo loco doctor` write,
 /// read back and delete a probe file through `ctx.storage`.
@@ -23,7 +23,7 @@ pub struct StorageCheck;
 #[async_trait]
 impl Initializer for StorageCheck {
     fn name(&self) -> String {
-        "loco-kit-storage".to_string()
+        "loco-kit-local-storage".to_string()
     }
 
     async fn check(&self, ctx: &AppContext) -> Result<Option<Check>> {
@@ -34,7 +34,7 @@ impl Initializer for StorageCheck {
 /// Writes, reads back and deletes a probe file.
 pub async fn probe(storage: &Storage) -> Check {
     let path = Path::new(PROBE_DIR).join(StorageKey::generate().as_str());
-    let content = Bytes::from_static(b"loco-kit-storage probe");
+    let content = Bytes::from_static(b"loco-kit-local-storage probe");
     let round_trip = async {
         storage.upload(&path, &content).await?;
         let read: Vec<u8> = storage.download(&path).await?;
