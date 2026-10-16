@@ -1,12 +1,15 @@
 [package]
 name = "loco-kit-credentials"
 version = "0.1.0"
-edition = "2021"
-publish = false
-
-# Encrypted `config/credentials*.yml.enc` (Rails' credentials) and the
-# `cargo loco credentials` command. App-agnostic: it depends on Loco, never on
-# the app crate.
+description = "Encrypted credentials files for Loco apps, like Rails' credentials.yml.enc, with a `cargo loco credentials` command."
+readme = "README.md"
+keywords = ["loco", "credentials", "secrets", "encryption", "config"]
+categories = ["web-programming", "config", "cryptography"]
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
 
 [dependencies]
 loco-rs = { workspace = true }

@@ -21,8 +21,6 @@
 //! )
 //! .await?;
 //! ```
-//!
-//! The generator templates in `.loco-templates/` write migrations this way.
 
 use heck::ToSnakeCase;
 pub use loco_rs::schema::*;

@@ -1,0 +1,6 @@
+# cargo-release (https://github.com/crate-ci/cargo-release). Each crate is
+# released on its own: `cargo release patch -p loco-kit-credentials --execute`
+# bumps its version, commits, and tags `loco-kit-credentials-v0.1.1`.
+tag-name = "{{crate_name}}-v{{version}}"
+# Git tags only until the APIs settle; drop this line to publish to crates.io.
+publish = false

@@ -5,9 +5,9 @@
 //!   have none), so Postgres, `SQLite` and `MySQL` get the same ids.
 //! * **models**: [`UuidV7PrimaryKey::with_uuidv7_pk`] fills an unset primary
 //!   key; call it from the model's `before_save`.
-//! * **migrations**: [`schema`] is `loco_rs::schema` with `create_table`,
-//!   `create_join_table` and `add_reference` typing `<table>_id` foreign keys
-//!   as UUIDs instead of 64-bit integers.
+//! * **migrations**: [`schema`] is `loco_rs::schema` with an `add_reference`
+//!   that types the `<table>_id` foreign key as a UUID instead of a 64-bit
+//!   integer.
 
 pub mod schema;
 

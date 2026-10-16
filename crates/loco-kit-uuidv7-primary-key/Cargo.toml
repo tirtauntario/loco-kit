@@ -1,12 +1,15 @@
 [package]
 name = "loco-kit-uuidv7-primary-key"
 version = "0.1.0"
-edition = "2021"
-publish = false
-
-# UUID v7 primary keys for Loco models on Postgres, SQLite and MySQL: ids
-# are made in Rust on insert, and the migration helpers type foreign keys as
-# UUIDs. App-agnostic: it depends on Loco, never on the app.
+description = "UUID v7 primary keys for Loco models and migrations on Postgres, SQLite and MySQL."
+readme = "README.md"
+keywords = ["loco", "uuid", "uuidv7", "sea-orm", "primary-key"]
+categories = ["web-programming", "database"]
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
 
 [dependencies]
 loco-rs = { workspace = true }

@@ -1,13 +1,15 @@
 [package]
 name = "loco-kit-local-storage"
 version = "0.1.0"
-edition = "2021"
-publish = false
-
-# `ctx.storage` on the local disk or in memory, from an `initializers.storage`
-# config block, plus sharded storage keys and a `cargo loco doctor` check.
-# App-agnostic: it depends on Loco, never on the app. S3 needs no kit: use
-# Loco's own `storage_aws_s3` driver.
+description = "Local-disk and in-memory `ctx.storage` for Loco apps, configured from YAML, with sharded storage keys."
+readme = "README.md"
+keywords = ["loco", "storage", "filesystem", "uploads"]
+categories = ["web-programming", "filesystem"]
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+rust-version.workspace = true
 
 [dependencies]
 loco-rs = { workspace = true }

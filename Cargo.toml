@@ -1,0 +1,16 @@
+[workspace]
+# One crate per kit. They share the Loco version below, so a Loco upgrade is
+# one change, but each crate keeps its own version and release tag.
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Tirta Untario <tirta@untario.com>"]
+repository = "https://github.com/tirtauntario/loco-kit"
+# loco-rs 1.2's own minimum.
+rust-version = "1.94"
+
+[workspace.dependencies]
+loco-rs = { version = "1.2" }
