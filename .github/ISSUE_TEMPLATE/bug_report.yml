@@ -1,0 +1,57 @@
+name: Bug report
+description: A kit does not work as its README says
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not report security vulnerabilities here. See SECURITY.md.
+        Never paste master keys, `.key` files, decrypted credentials or other secrets.
+  - type: dropdown
+    id: crate
+    attributes:
+      label: Crate
+      options:
+        - loco-kit-credentials
+        - loco-kit-local-storage
+        - loco-kit-uuidv7-primary-key
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Crate version or tag
+      placeholder: loco-kit-credentials-v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: loco
+    attributes:
+      label: loco-rs and Rust versions
+      description: From `cargo tree -i loco-rs` and `rustc --version`
+      placeholder: loco-rs 1.2.0, rustc 1.94.0
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: OS and database
+      placeholder: Ubuntu 24.04, Postgres 17
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The relevant code and config, as small as you can make it.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output (redacted)
+      render: text

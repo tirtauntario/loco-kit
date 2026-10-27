@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose a change to a kit, or a new kit
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Each kit does one thing and depends on Loco only. If Loco itself should change, ask the Loco project.
+  - type: dropdown
+    id: crate
+    attributes:
+      label: Crate
+      options:
+        - loco-kit-credentials
+        - loco-kit-local-storage
+        - loco-kit-uuidv7-primary-key
+        - A new kit
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What do you need, and why?
+      description: The problem in your app, not only the solution you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

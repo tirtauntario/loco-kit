@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/tirtauntario/loco-kit/discussions
+    about: Questions about using a kit go to Discussions.
+  - name: Report a security vulnerability
+    url: https://github.com/tirtauntario/loco-kit/security/advisories/new
+    about: Please report security issues privately.
