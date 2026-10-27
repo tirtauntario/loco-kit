@@ -19,7 +19,7 @@ The crate is not on crates.io yet. Depend on a release tag, in both the app's
 
 ```toml
 [dependencies]
-loco-kit-uuidv7-primary-key = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-uuidv7-primary-key-v0.1.0" }
+loco-kit-uuidv7-primary-key = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-uuidv7-primary-key-v0.2.0" }
 ```
 
 It needs loco-rs 1.2 (with Sea-ORM 2.0) and Rust 1.94 or newer.
@@ -126,7 +126,7 @@ every new model**. An insert without it fails with a NOT NULL error on `id`.
 ## Generators
 
 Loco's generators write integer keys. The kit ships template overrides in
-[`templates/`](https://github.com/tirtauntario/loco-kit/tree/main/crates/loco-kit-uuidv7-primary-key/templates)
+[`templates/`](https://github.com/tirtauntario/loco-kit/tree/loco-kit-uuidv7-primary-key-v0.2.0/crates/loco-kit-uuidv7-primary-key/templates)
 that make `cargo loco generate model`, `migration` and `scaffold` write UUID
 keys and references. Loco uses a template from the app's `.loco-templates/`
 folder whenever one sits at the same path as its built-in template. The
@@ -134,7 +134,8 @@ templates are left out of the crate package, so copy them from GitHub. From
 the app root:
 
 ```sh
-git clone --depth 1 https://github.com/tirtauntario/loco-kit /tmp/loco-kit
+git clone --depth 1 --branch loco-kit-uuidv7-primary-key-v0.2.0 \
+  https://github.com/tirtauntario/loco-kit /tmp/loco-kit
 mkdir -p .loco-templates
 cp -R /tmp/loco-kit/crates/loco-kit-uuidv7-primary-key/templates/. .loco-templates/
 ```

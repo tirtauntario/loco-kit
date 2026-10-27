@@ -48,7 +48,7 @@ The kits are not on crates.io yet. Depend on a release tag in your app's
 [dependencies]
 loco-kit-credentials = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-credentials-v0.1.0" }
 loco-kit-local-storage = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-local-storage-v0.1.0" }
-loco-kit-uuidv7-primary-key = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-uuidv7-primary-key-v0.1.0" }
+loco-kit-uuidv7-primary-key = { git = "https://github.com/tirtauntario/loco-kit", tag = "loco-kit-uuidv7-primary-key-v0.2.0" }
 ```
 
 Keep only the lines you need. Cargo finds a crate by name anywhere in this
