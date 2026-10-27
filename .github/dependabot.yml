@@ -11,6 +11,10 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # Its refs are toolchain versions (the MSRV job pins @1.94), not
+      # action releases. Bump it by hand with rust-version.
+      - dependency-name: dtolnay/rust-toolchain
     groups:
       github-actions:
         patterns: ["*"]
