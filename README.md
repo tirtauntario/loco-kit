@@ -14,6 +14,22 @@ framework and depends on Loco only, never on a particular app.
 
 All kits target **loco-rs 1.2** and Rust 1.94 or newer.
 
+## Why
+
+I build apps on Loco and kept missing a few things Rails gives me. Each kit
+brings one of them over:
+
+- **Storage.** Rails' Active Storage spreads files across nested
+  subdirectories taken from the storage key, so no single directory has to
+  hold every upload. `loco-kit-local-storage` does the same for `ctx.storage`,
+  which keeps the disk fast as the file count grows.
+- **UUID v7 primary keys.** I want UUID v7 as the primary key in the
+  database: safe to expose in URLs, yet ordered by time, so inserts and
+  indexes behave much like integer ids.
+- **Credentials.** One encrypted credentials file per environment, modeled
+  after Rails' credentials. The encrypted files live in git; only the key
+  stays out.
+
 ## Installing
 
 The kits are not on crates.io yet. Depend on a release tag:
