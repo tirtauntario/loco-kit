@@ -28,7 +28,10 @@ pub const INITIALIZER_KEY: &str = "storage";
 pub enum StorageConfig {
     /// Files under `root` (relative to the working directory), created when
     /// missing.
-    Local { root: PathBuf },
+    Local {
+        /// The folder files are stored under.
+        root: PathBuf,
+    },
     /// In memory, gone when the process exits. For tests.
     Memory,
 }

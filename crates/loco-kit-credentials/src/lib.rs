@@ -79,6 +79,8 @@ pub struct Credentials {
 }
 
 impl Credentials {
+    /// Credentials from already-decrypted `values`, for `environment`. Useful
+    /// in tests; apps get theirs from [`Credentials::from_context`].
     #[must_use]
     pub fn new(values: Value, environment: impl Into<String>) -> Self {
         Self {

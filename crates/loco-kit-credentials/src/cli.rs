@@ -125,12 +125,17 @@ fn report(location: &Location, outcome: &Outcome) {
 pub struct Outcome {
     /// The key file it generated, for a brand-new credentials file.
     pub key_created: Option<PathBuf>,
+    /// Whether the file was written.
     pub result: Saved,
 }
 
+/// What [`edit`] did with the credentials file.
 #[derive(Debug, PartialEq, Eq)]
 pub enum Saved {
+    /// The edited content was encrypted and saved.
     Written,
+    /// The content did not change, so the file was left byte for byte as it
+    /// was.
     Unchanged,
     /// The edit was invalid and the user declined to re-open the editor.
     Aborted,

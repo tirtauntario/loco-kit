@@ -25,6 +25,8 @@ use serde_json::Value;
 
 use super::store::Loaded;
 
+/// A config string starting with this is a placeholder for the credential
+/// at the dotted path that follows it.
 pub const PLACEHOLDER_PREFIX: &str = "credential:";
 
 /// Replaces every placeholder in `config` with its credential. Credentials no

@@ -42,6 +42,7 @@ impl StorageKey {
         }
     }
 
+    /// The key itself, as saved in the database.
     #[must_use]
     pub fn as_str(&self) -> &str {
         &self.0

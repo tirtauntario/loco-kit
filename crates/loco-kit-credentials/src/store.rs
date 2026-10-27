@@ -44,7 +44,9 @@ pub fn master_key_from_env() -> Option<String> {
 /// One encrypted credentials file and the key file beside it.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Location {
+    /// The encrypted file, `*.yml.enc`.
     pub file: PathBuf,
+    /// Its key file, `master.key` or `<env>.key`.
     pub key: PathBuf,
 }
 

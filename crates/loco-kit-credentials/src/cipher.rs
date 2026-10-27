@@ -21,6 +21,7 @@ const NONCE_LEN: usize = 12;
 pub struct MasterKey(Key<Aes256Gcm>);
 
 impl MasterKey {
+    /// A new random key.
     #[must_use]
     pub fn generate() -> Self {
         Self(Aes256Gcm::generate_key(OsRng))
@@ -34,6 +35,7 @@ impl MasterKey {
         Some(Self(Key::<Aes256Gcm>::from(bytes)))
     }
 
+    /// The key as 64 lowercase hex characters, as written to a key file.
     #[must_use]
     pub fn to_hex(&self) -> String {
         hex::encode(self.0)
