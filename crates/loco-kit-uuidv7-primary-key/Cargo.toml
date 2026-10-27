@@ -1,6 +1,6 @@
 [package]
 name = "loco-kit-uuidv7-primary-key"
-version = "0.1.0"
+version = "0.2.0"
 description = "UUID v7 primary keys for Loco models and migrations on Postgres, SQLite and MySQL."
 readme = "README.md"
 keywords = ["loco", "uuid", "uuidv7", "sea-orm", "primary-key"]

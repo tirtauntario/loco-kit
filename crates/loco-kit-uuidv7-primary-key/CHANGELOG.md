@@ -7,6 +7,8 @@ and this crate follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-27
+
 ### Added
 
 - Generator templates in `templates/`. Copied into an app's
@@ -27,5 +29,6 @@ First release.
 - `schema`: `loco_rs::schema` with an `add_reference` that adds a UUID
   `<table>_id` column instead of a 64-bit integer.
 
-[Unreleased]: https://github.com/tirtauntario/loco-kit/compare/loco-kit-uuidv7-primary-key-v0.1.0...HEAD
+[Unreleased]: https://github.com/tirtauntario/loco-kit/compare/loco-kit-uuidv7-primary-key-v0.2.0...HEAD
+[0.2.0]: https://github.com/tirtauntario/loco-kit/compare/loco-kit-uuidv7-primary-key-v0.1.0...loco-kit-uuidv7-primary-key-v0.2.0
 [0.1.0]: https://github.com/tirtauntario/loco-kit/tree/loco-kit-uuidv7-primary-key-v0.1.0
