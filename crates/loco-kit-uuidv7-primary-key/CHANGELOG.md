@@ -7,6 +7,12 @@ and this crate follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [Unreleased]
 
+### Added
+
+- Generator templates in `templates/`. Copied into an app's
+  `.loco-templates/`, they make `cargo loco generate model`, `migration` and
+  `scaffold` write UUID v7 keys and UUID references.
+
 ## [0.1.0] - 2026-10-16
 
 First release.

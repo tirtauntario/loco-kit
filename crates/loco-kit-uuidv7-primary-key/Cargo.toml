@@ -10,6 +10,8 @@ license.workspace = true
 authors.workspace = true
 repository.workspace = true
 rust-version.workspace = true
+# The generator templates are copied from GitHub, not used from the package.
+exclude = ["templates/"]
 
 [dependencies]
 loco-rs = { workspace = true }

@@ -29,8 +29,8 @@ It needs loco-rs 1.2 (with Sea-ORM 2.0) and Rust 1.94 or newer.
 1. In each migration, import the kit's schema module instead of
    `loco_rs::schema`, and use `ColType::PkUuid` for the id.
 2. In each model, fill the id in `before_save`.
-3. Optionally, override Loco's generator templates so new models get both
-   (see [Generators](#generators)).
+3. Optionally, copy the kit's generator templates into the app, so new
+   migrations, models and scaffolds use UUIDs (see [Generators](#generators)).
 
 ## Migrations
 
@@ -100,6 +100,8 @@ impl ActiveModelBehavior for ActiveModel {
 }
 ```
 
+For a table without timestamps, the body is just `self.with_uuidv7_pk()`.
+
 `cargo loco db entities` writes this file without the call, so **add it to
 every new model**. An insert without it fails with a NOT NULL error on `id`.
 
@@ -123,10 +125,53 @@ every new model**. An insert without it fails with a NOT NULL error on `id`.
 
 ## Generators
 
-Loco's generators write integer keys. To make `cargo loco generate model`,
-`migration` and `scaffold` write UUID keys and references, override their
-templates in the app's `.loco-templates/` folder (see Loco's generator docs).
-The kit does not ship templates.
+Loco's generators write integer keys. The kit ships template overrides in
+[`templates/`](https://github.com/tirtauntario/loco-kit/tree/main/crates/loco-kit-uuidv7-primary-key/templates)
+that make `cargo loco generate model`, `migration` and `scaffold` write UUID
+keys and references. Loco uses a template from the app's `.loco-templates/`
+folder whenever one sits at the same path as its built-in template. The
+templates are left out of the crate package, so copy them from GitHub. From
+the app root:
+
+```sh
+git clone --depth 1 https://github.com/tirtauntario/loco-kit /tmp/loco-kit
+mkdir -p .loco-templates
+cp -R /tmp/loco-kit/crates/loco-kit-uuidv7-primary-key/templates/. .loco-templates/
+```
+
+Each one is Loco 1.2's built-in template with only these changes:
+
+| Template | Used by | Change |
+| --- | --- | --- |
+| `model/model.t` | `generate model`, `generate scaffold`, `generate migration CreatePosts` | Imports the kit's `schema`. The id is `ColType::PkUuid`, and each reference gets a `Uuid` column (`UuidNull` for `user:references?`). |
+| `migration/add_references.t` | `generate migration AddUserRefToPosts` | Imports the kit's `schema`, so `add_reference` adds a UUID column. `down` also drops the column, and works for `user:references?`. |
+| `migration/join_table.t` | `generate migration CreateJoinTableUsersAndGroups` | Imports the kit's `schema`, and each reference gets a `Uuid` column. |
+| `model/test.t` | `generate model`, `generate scaffold` | Adds a test that fails until the model calls `with_uuidv7_pk()`. |
+| `scaffold/api/dto.t` | `generate scaffold` | The DTO's `id` and reference fields are `Uuid`, typed `string` in TypeScript. |
+| `scaffold/api/controller.t` | `generate scaffold` | The `/{id}` routes take a `Uuid`. |
+
+A template cannot write the model file: `cargo loco db entities` does, after
+the migration runs. So after `generate model` or `generate scaffold`, **add
+`with_uuidv7_pk()` to `before_save`** in `src/models/<table>.rs` (see
+[Models](#models)). The generator prints a reminder, and the generated model
+test fails until you do.
+
+Things to know:
+
+- **Reference columns take the field name.** `author:references` adds
+  `author_id`, the same name the scaffold's DTO uses. Name the column
+  yourself with `author:references:reviewer_id`.
+- **Reference a table with a UUID id.** Loco's starter `users` table keeps an
+  integer id, so `user:references` only works once `users.id` is a UUID too.
+- **The scaffold DTO guesses references by name.** It only sees each field's
+  Rust type, so it treats an `int` field ending in `_id` as a reference and
+  makes it a `Uuid`. Name such fields differently, or fix the DTO by hand.
+- **The React frontend scaffold is not covered.** When the app has a
+  `frontend/`, Loco also writes pages that expect numeric ids.
+- **The templates follow loco-rs 1.2.** After a Loco upgrade, compare them
+  with the new built-ins. `cargo loco generate override <path>` copies a
+  built-in into `.loco-templates/`, but skips files that already exist, so run
+  it in a scratch app.
 
 ## Limits
 
