@@ -7,7 +7,7 @@
 use std::fmt;
 
 use aes_gcm::{
-    aead::{Aead, AeadCore, KeyInit, OsRng},
+    aead::{Aead, Generate, KeyInit},
     Aes256Gcm, Key, Nonce,
 };
 use base64::{engine::general_purpose::STANDARD, Engine};
@@ -24,7 +24,7 @@ impl MasterKey {
     /// A new random key.
     #[must_use]
     pub fn generate() -> Self {
-        Self(Aes256Gcm::generate_key(OsRng))
+        Self(Key::<Aes256Gcm>::generate())
     }
 
     /// Parses 64 hex characters; surrounding whitespace (a trailing newline
@@ -60,7 +60,7 @@ pub enum DecryptError {
 /// Encrypts `plaintext` under a fresh random nonce.
 #[must_use]
 pub fn encrypt(key: &MasterKey, plaintext: &str) -> String {
-    let nonce = Aes256Gcm::generate_nonce(&mut OsRng);
+    let nonce = Nonce::generate();
     let ciphertext = Aes256Gcm::new(&key.0)
         .encrypt(&nonce, plaintext.as_bytes())
         // Only fails for plaintexts beyond GCM's ~64 GiB limit.
@@ -103,6 +103,17 @@ mod tests {
         let key = MasterKey::generate();
         let sealed = encrypt(&key, "jwt:\n  secret: s3cret\n");
         assert_eq!(decrypt(&key, &sealed).unwrap(), "jwt:\n  secret: s3cret\n");
+    }
+
+    #[test]
+    fn opens_a_file_from_an_earlier_release() {
+        // Written by loco-kit-credentials 0.1.0 (aes-gcm 0.10), with key
+        // bytes 0..32 and nonce bytes 100..112.
+        let key =
+            MasterKey::parse("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
+                .unwrap();
+        let sealed = "ZGVmZ2hpamtsbW5v--ImyqXHPJdu1bAS2Nrl9KjnGhdG//ZrAlLgi6b1feM1HVih0BCoc=";
+        assert_eq!(decrypt(&key, sealed).unwrap(), "jwt:\n  secret: s3cret\n");
     }
 
     #[test]

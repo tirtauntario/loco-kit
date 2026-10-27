@@ -15,8 +15,8 @@ rust-version.workspace = true
 loco-rs = { workspace = true }
 serde = { version = "1" }
 serde_json = { version = "1" }
-aes-gcm = { version = "0.10" }
-base64 = { version = "0.22" }
+aes-gcm = { version = "0.11" }
+base64 = { version = "0.23", default-features = false, features = ["std"] }
 hex = { version = "0.4" }
 tempfile = { version = "3" }
 clap = { version = "4", features = ["derive"] }
